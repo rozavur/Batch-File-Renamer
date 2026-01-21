@@ -7,7 +7,7 @@
  * Uses @dnd-kit for accessible drag-and-drop functionality.
  */
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { 
   File, 
   Image, 
@@ -170,15 +170,11 @@ function SortableFileItemRow({ file, index }: FileItemRowProps) {
       {/* Status */}
       <div className="w-6 flex-shrink-0">
         {!file.isValid ? (
-          <div className="relative group/tooltip cursor-help">
-            {getErrorIcon(file.errorMessage)}
-            <div className="absolute bottom-full right-0 mb-2 px-3 py-1.5 bg-dark-700 text-white text-xs rounded-lg
-                          opacity-0 group-hover/tooltip:opacity-100 pointer-events-none transition-opacity
-                          whitespace-nowrap shadow-lg z-50">
-              {file.errorMessage}
-              <div className="absolute top-full right-2 -mt-1 border-4 border-transparent border-t-dark-700" />
+          <Tooltip text={file.errorMessage || ''} position="top">
+            <div className="cursor-help">
+              {getErrorIcon(file.errorMessage)}
             </div>
-          </div>
+          </Tooltip>
         ) : hasChanged ? (
           <Check className="w-5 h-5 text-green-400" />
         ) : null}
@@ -203,37 +199,19 @@ export function FileList() {
   const clearFiles = useStore(state => state.clearFiles);
   const reorderFiles = useStore(state => state.reorderFiles);
   
-  // Resizable height state
-  const [listHeight, setListHeight] = useState(350);
-  const isResizing = useRef(false);
-  const startY = useRef(0);
-  const startHeight = useRef(0);
+  const [listHeight, setListHeight] = useState(0);
+  const [itemHeight, setItemHeight] = useState(0);
+  const listRef = useRef<HTMLDivElement>(null);
   
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    isResizing.current = true;
-    startY.current = e.clientY;
-    startHeight.current = listHeight;
-    document.body.style.cursor = 'ns-resize';
-    document.body.style.userSelect = 'none';
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isResizing.current) return;
-      const deltaY = e.clientY - startY.current;
-      const newHeight = Math.max(350, startHeight.current + deltaY);
+  useEffect(() => {
+    if (listRef.current && files.length > 0) {
+      const newHeight = listRef.current.scrollHeight;
       setListHeight(newHeight);
-    };
-    
-    const handleMouseUp = () => {
-      isResizing.current = false;
-      document.body.style.cursor = '';
-      document.body.style.userSelect = '';
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-    
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  }, [listHeight]);
+      if (files.length <= 30) {
+        setItemHeight(newHeight / files.length);
+      }
+    }
+  }, [files]);
   
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -256,16 +234,15 @@ export function FileList() {
     }
   };
   
-  // Show empty state if no files
   if (files.length === 0) {
     return (
-      <div className="glass-card p-5 flex flex-col">
+      <div className="glass-card p-5 flex flex-col" style={{ height: '650px' }}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-white">
             Files (0)
           </h2>
         </div>
-        <div className="flex items-center justify-center py-8">
+        <div className="flex items-center justify-center py-8 flex-1">
           <div className="text-center text-dark-500">
             <File className="w-12 h-12 mx-auto mb-3 opacity-30" />
             <p className="text-sm">No files loaded</p>
@@ -280,8 +257,18 @@ export function FileList() {
   const duplicateCount = files.filter(f => f.errorMessage?.includes('Duplicate')).length;
   const errorCount = files.filter(f => !f.isValid && !f.errorMessage?.includes('Duplicate')).length;
   
+  const panelStyle = files.length === 0 
+    ? { height: '650px' } 
+    : files.length > 30 
+      ? { height: `${itemHeight * 30}px` } 
+      : { minHeight: '650px' };
+  
+  const listStyle = files.length > 30 
+    ? { height: `${itemHeight * 30}px`, overflowY: 'auto', overflowX: 'hidden', scrollbarGutter: 'stable' }
+    : { height: `${listHeight}px`, overflowY: 'hidden', overflowX: 'hidden' };
+  
   return (
-    <div className="glass-card p-5 flex flex-col">
+    <div className="glass-card p-5 flex flex-col" style={panelStyle}>
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-4 flex-wrap">
@@ -324,11 +311,9 @@ export function FileList() {
           strategy={verticalListSortingStrategy}
         >
           <div 
-            className="space-y-2 overflow-y-auto overflow-x-hidden pr-1"
-            style={{ 
-              height: `${listHeight}px`,
-              scrollbarGutter: 'stable'
-            }}
+            ref={listRef}
+            className="space-y-2 pr-1"
+            style={listStyle}
           >
             {files.map((file, index) => (
               <SortableFileItemRow key={file.id} file={file} index={index} />
@@ -336,14 +321,6 @@ export function FileList() {
           </div>
         </SortableContext>
       </DndContext>
-      
-      {/* Resize handle */}
-      <div 
-        onMouseDown={handleMouseDown}
-        className="flex items-center justify-center mt-3 py-1.5 cursor-ns-resize group hover:bg-dark-700/30 rounded-lg transition-colors"
-      >
-        <GripHorizontal className="w-5 h-5 text-dark-600 group-hover:text-cyan-400 transition-colors" />
-      </div>
     </div>
   );
 }

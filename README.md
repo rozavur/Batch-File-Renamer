@@ -235,7 +235,7 @@ You are free to use, modify, and distribute this software for personal and comme
 
 ## **Screenshots**
 
-The following screenshots demonstrate the core functionality of Batch File Renamer, including the file upload interface, live rename preview, operation configuration, and the comprehensive help documentation.
+The following screenshots demonstrate the core functionality of Batch File Renamer, including the file upload interface, live rename preview, operation configuration, and duplicate detection.
 
 <table>
   <tr>
