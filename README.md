@@ -5,6 +5,11 @@
 <h1 align="center">Batch File Renamer</h1>
 
 <p align="center">
+  <b>A modern, browser-based batch file renaming tool with instant live preview and powerful operations.</b><br>
+  <b>Drag and drop files, configure rename operations, and export all renamed files as a ZIP archive.</b>
+</p>
+
+<p align="center">
   <a href="https://github.com/BerndHagen/Batch-File-Renamer/releases"><img src="https://img.shields.io/github/v/release/BerndHagen/Batch-File-Renamer?include_prereleases&style=flat-square&color=cd853f" alt="Latest Release"></a>&nbsp;&nbsp;
   <a href="https://github.com/BerndHagen/Batch-File-Renamer/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-512bd4?style=flat-square" alt="License"></a>&nbsp;&nbsp;
   <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react" alt="React Version">&nbsp;&nbsp;
